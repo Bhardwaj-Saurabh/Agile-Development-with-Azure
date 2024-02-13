@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+rm -r #!/usr/bin/env bash
 
 PORT=443
 echo "Port: $PORT"
