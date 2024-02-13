@@ -30,10 +30,13 @@ stages:
     pool: myagent
     steps:    
     - script: |
+        python3 -m venv antenv
+        source antenv/bin/activate
         python3 -m pip install --upgrade pip
-        python3 -m pip install setup
-        python3 -m pip install -r requirements.txt
+        pip install setup
+        pip install -r requirements.txt
       workingDirectory: $(projectRoot)
+      displayName: "Install requirements"
 
     - script: |
         export PATH=$HOME/.local/bin:$PATH
