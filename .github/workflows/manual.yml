@@ -4,17 +4,15 @@
 # https://aka.ms/yaml
 trigger:
 - master
-- build
-- build-and-deploye
 
 pool: myagent
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureServiceConnectionId: 'msc'
+  azureServiceConnectionId: 'myserviceconnection'
   
   # Web app name
-  webAppName: 'udacityproject2'
+  webAppName: 'pricehouseprediction'
 
   # Environment name
   environmentName: 'udacityprojectenv'
@@ -28,12 +26,15 @@ stages:
   jobs:
   - job: BuildJob
     pool: myagent
-    steps:    
+    steps:
     - script: |
-        python3.7 -m pip install --upgrade pip
-        python3.7 -m pip install setup
-        python3.7 -m pip install -r requirements.txt
+        python3 -m venv antenv
+        source antenv/bin/activate
+        python3 -m pip install --upgrade pip
+        pip install setup
+        pip install -r requirements.txt
       workingDirectory: $(projectRoot)
+      displayName: "Install requirements"
 
     - script: |
         export PATH=$HOME/.local/bin:$PATH
