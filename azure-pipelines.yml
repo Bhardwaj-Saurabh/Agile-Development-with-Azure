@@ -20,21 +20,12 @@ variables:
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
 
-  # Python version: 3.9
-  pythonVersion: '3.9'
-
 stages:
 - stage: Build
   displayName: Build stage
   jobs:
   - job: BuildJob
     pool: appagent
-
-    steps:    
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '$(pythonVersion)'
-      displayName: 'Use Python $(pythonVersion)'
 
     - script: |
         python3 -m venv antenv
@@ -77,10 +68,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '$(pythonVersion)'
-            displayName: 'Use Python version'
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
