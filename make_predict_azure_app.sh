@@ -1,4 +1,4 @@
-rm -r #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 PORT=443
 echo "Port: $PORT"
@@ -25,5 +25,5 @@ curl -d '{
    }
 }'\
      -H "Content-Type: application/json" \
-     -X POST https://udacityproject2.azurewebsites.net:$PORT/predict 
+     -X POST https://pricehouseprediction.azurewebsites.net:$PORT/predict 
      #your application name <yourappname>goes here
