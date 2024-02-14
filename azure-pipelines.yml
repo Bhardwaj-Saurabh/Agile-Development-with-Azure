@@ -4,17 +4,15 @@
 # https://aka.ms/yaml
 trigger:
 - master
-- build
-- build-and-deploye
 
-pool: myagent
+pool: appagent
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureServiceConnectionId: 'msc'
+  azureServiceConnectionId: 'myserviceconnection'
   
   # Web app name
-  webAppName: 'udacityproject2'
+  webAppName: 'pricehouseprediction'
 
   # Environment name
   environmentName: 'udacityprojectenv'
@@ -27,7 +25,7 @@ stages:
   displayName: Build stage
   jobs:
   - job: BuildJob
-    pool: myagent
+    pool: appagent
     steps:    
     - script: |
         python3 -m venv antenv
@@ -64,7 +62,7 @@ stages:
   condition: succeeded()
   jobs:
   - deployment: DeploymentJob
-    pool: myagent
+    pool: appagent
     environment: $(environmentName)
     strategy:
       runOnce:
